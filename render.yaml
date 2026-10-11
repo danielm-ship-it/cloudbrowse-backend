@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: cloudbrowse-backend
+    runtime: python
+    buildCommand: |
+      pip install -r requirements.txt
+      playwright install chromium
+      playwright install-deps chromium
+    startCommand: python server.py
+    envVars:
+      - key: PORT
+        value: 10000          # Render sets this automatically too
+      - key: ALLOWED_ORIGIN
+        value: "*"            # change to your InfinityFree domain
+      - key: API_KEY
+        generateValue: true   # Render auto-generates a secure random value
+      - key: SESSION_TIMEOUT
+        value: "600"
+      - key: MAX_SESSIONS
+        value: "5"            # free tier has limited RAM

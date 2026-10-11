@@ -1,0 +1,9 @@
+[build]
+builder = "nixpacks"
+
+[build.nixpacksPlan.phases.setup]
+nixPkgs = ["chromium", "nss", "nspr", "atk", "cups", "gtk3", "libdrm", "mesa"]
+
+[deploy]
+startCommand = "playwright install chromium && python server.py"
+restartPolicyType = "on_failure"
